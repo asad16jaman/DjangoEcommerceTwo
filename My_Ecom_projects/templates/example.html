@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %} {% endblock %}
+{% block style %} {% endblock %}
+{% block body %}
+<div class="container">
+    {% include 'navebar.html' %}
+    <div class="my-5">
+        <h2>Your cart:</h2>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col" width="15%"></th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Quentity</th>
+                <th scope="col" align="right">price</th>
+                <th scope="col">remove</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for cart in carts %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <th>{{ cart.item.name}}</th>
+                <th>
+                    <a href="{% url 'app_order:decrise_quentity' cart.item.pk %}" class="mr-2"><span class="badge badge-light"><i class="fas fa-minus"></i></span></a>
+                    {{ cart.quentity }}
+                    <a href="{% url 'app_order:increase' cart.item.pk %}" class="mr-2"><span class="badge badge-light"><i class="fas fa-plus"></i></span></a>
+                </th>
+                <th>
+                    &#2547;
+                    {{ cart.get_total }}
+                </th>
+                <th><a href="{% url 'app_order:remove' cart.item.pk %}" class="btn btn-danger">Remove</a></th>
+            </tr>
+            {% endfor %}
+            <tr>
+                <th scope="row"></th>
+                <td colspan="2" align="right">Total</td>
+                <td >&#2547;{{ orders.get_totals }}</td>
+            </tr>
+            <tr>
+                <th scope="row"></th>
+                <td colspan="4" class="text-right">
+                    <a href="{% url 'home' %}" class="btn btn-warning mr-5">Continue shot</a>
+                    <a href="" class="btn btn-primary mr-5">Procied to card</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

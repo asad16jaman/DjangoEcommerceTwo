@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %} {% endblock %}
+{% block style %} {% endblock %}
+{% block body %}
+
+
+<div class="container">
+    {% include 'navebar.html' %}
+    <h2>Bulling your address : </h2>
+    <div class="row">
+        {% load crispy_forms_tags %}
+        <div class="col-md-8">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" class="btn btn-success">
+            </form>
+        </div>
+        <div class="col-md-4 mt-5">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table">
+                        {% for x in order_item %}
+                            <tr>
+                                <td class="mx-auto" colspan="4">
+                                    {{x.item.name}} X {{x.quentity}}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                            <tr>
+                                <td class="pt-4"> Total : {{ total }}&#2547;</td>
+                                 <td>
+                                     {% if save_address.is_fully_filled %}
+                                        <a href="{% url 'App_payment:payment' %}" class="btn btn-sm btn-primary mt-2">make payment</a>
+                                    {% else %}
+                                        <p>sobgupai puron koro</p>
+                                    {% endif %}
+                                 </td>
+                            </tr>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

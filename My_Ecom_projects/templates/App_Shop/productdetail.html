@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block body %}
+
+    <div class="container">
+        {% include 'navebar.html' %}
+        <div class="row">
+            <div class="col-md-6">
+                <img src="/media/{{ myproduct.mainimg}}" alt="" width="100%" height="450px">
+            </div>
+            <div class="col-md-6">
+
+                <div class="card mt-3 " style="">
+                      <div class="card-header">{{ myproduct.name }}</div>
+                      <div class="card-body">
+                        <h5 class="card-title">Discript</h5>
+                        <p class="card-text">{{ myproduct.detail_text|linebreaks }}</p>
+                          <p>&#2547 : {{myproduct.price}}</p>
+                          <p>{{ myproduct.created|date:"d-M , Y"}}</p>
+                          <a href="{% url 'app_order:add' myproduct.pk  %}"  class="btn btn-outline-success"><i class="fa  fa-shopping-cart mr-1"></i>add to cart</a>
+                      </div>
+                </div>
+        </div>
+    </div>
+{% endblock %}
